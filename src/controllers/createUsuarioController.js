@@ -1,7 +1,7 @@
-const repository = require("../repository/createMareaRepository")
+const repository = require("../repository/createUsuarioRepository")
 const jwtUtils = require('../utils/jwtUtils');
 
-exports.createMareaController = async(req,res) =>{
+exports.createUsuarioController = async(req,res) =>{
     try{
         const token = req.headers.authorization
         const decodedToken = jwtUtils.verifyToken(token)
@@ -12,12 +12,12 @@ exports.createMareaController = async(req,res) =>{
         if(!data){
             return res.status(400).json({status:400, message: "Error al realizar solicitud. Verifique parámetros."})
         }
-        let newMarea = await repository.createMareaRepository(data.nombreCompania, data.fechaInicio, data.fechaFin, data.idTeam)
-        return res.status(201).json({status:201, message: "Marea creado con éxito.", data: newMarea})}
+        let newUsuario = await repository.createUsuarioRepository(data.nombre, data.apellido, data.rut, data.mail, data.usuario, data.password, data.nombreEmpresa, data.foto)
+        return res.status(201).json({status:201, message: "Usuario creado con éxito.", data: newUsuario})}
     }catch(error){
         return res.status(500).json({
             status:500,
-            message: "Hubo un error al registrar la Marea."
+            message: error.message
         })
     }
 }

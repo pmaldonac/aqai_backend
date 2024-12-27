@@ -11,6 +11,11 @@ const ActividadesFaena = require('./ActividadesFaena');
 const Inmersion = require('./Inmersion');
 const InmersionActividadesFaena = require('./InmersionActividadesFaena');
 const Datalogger = require('./Datalogger');
+const Reporte = require('./Reporte');
+const Usuario = require('./Usuario');
+const Rol = require('./Rol');
+const UsuarioRol = require('./UsuarioRoles');
+
 
 async function syncDatabase() {
   try {

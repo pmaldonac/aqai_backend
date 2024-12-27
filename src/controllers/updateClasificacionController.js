@@ -1,15 +1,20 @@
 const repository = require("../repository/updateClasificacionRepository")
-
+const jwtUtils = require('../utils/jwtUtils');
 exports.updateClasificacionController = async(req,res) =>{
     try{
-        const id = req.params.id
-        const data = req.body
-        if(!data){
-           res.status(400).json({status:400, message:"Faltan parámetros para realizar la actualización"}) 
-        }
-        const Clasificacion = await repository.updateClasificacionRepository(id, data)
-        res.status(200).json({status:200, message:"Clasificacion Actualizada", data: Clasificacion})
-
+        const token = req.headers.authorization
+        const decodedToken = jwtUtils.verifyToken(token)
+        if(!decodedToken){
+            return res.status(401).json({status:401, message: "No autorizado."})
+        }else{
+            const id = req.params.id
+            const data = req.body
+            if(!data){
+            res.status(400).json({status:400, message:"Faltan parámetros para realizar la actualización"}) 
+            }
+            const Clasificacion = await repository.updateClasificacionRepository(id, data)
+            res.status(200).json({status:200, message:"Clasificacion Actualizada", data: Clasificacion})
+    }
     }catch(error){
         return res.status(500).json({
             status:500,

@@ -1,13 +1,20 @@
 const repository = require("../repository/createDataloggerRepository")
+const jwtUtils = require('../utils/jwtUtils');
 
 exports.createDataloggerController = async(req,res) =>{
     try{
-        const data = req.body
-        if(!data){
-            return res.status(400).json({status:400, message: "Error al realizar solicitud. Verifique parámetros."})
+        const token = req.headers.authorization
+        const decodedToken = jwtUtils.verifyToken(token)
+        if(!decodedToken){
+            return res.status(401).json({status:401, message: "No autorizado."})
+        }else{
+            const data = req.body
+            if(!data){
+                return res.status(400).json({status:400, message: "Error al realizar solicitud. Verifique parámetros."})
+            }
+            let Datalogger = await repository.createDataloggerRepository(data.idBuzo, data.idFaena, data.dispositivo)
+            return res.status(201).json({status:201, message: "Datalogger creado con éxito.", data: Datalogger})
         }
-        let Datalogger = await repository.createDataloggerRepository(data.idBuzo, data.idFaena, data.dispositivo)
-        return res.status(201).json({status:201, message: "Datalogger creado con éxito.", data: Datalogger})
     }catch(error){
         return res.status(500).json({
             status:500,
