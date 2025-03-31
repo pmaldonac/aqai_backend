@@ -13,11 +13,13 @@ const Inmersion = sequelize.define('Inmersion', {
     key: 'id',
   }},
   tiempoInicio: { type: DataTypes.DATE },
+  estado: {type:DataTypes.STRING(100)},
   tiempoFinal: { type: DataTypes.DATE },
   tiempoTotal: { type: DataTypes.INTEGER },
   fotoInicial: { type: DataTypes.BLOB },
   fotoFinal: { type: DataTypes.BLOB },
-  observacion: { type: DataTypes.TEXT }
+  observacion: { type: DataTypes.TEXT },
+  jsonData: { type: DataTypes.JSON }
 }, { timestamps: true , indexes: [
   {
     unique: true,

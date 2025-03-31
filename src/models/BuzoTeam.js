@@ -9,7 +9,7 @@ const BuzoTeam = sequelize.define('BuzoTeam', {
     idTeam:{type: DataTypes.INTEGER, allowNull: false, primaryKey:true},
     esSupervisor: {type:DataTypes.BOOLEAN, allowNull:false, defaultValue: false},
     fechaInicio: {type: DataTypes.DATE, allowNull:false},
-    fechaTermino: {type: DataTypes.DATE, defaultValue:null},
+    fechaFin: {type: DataTypes.DATE, defaultValue:null},
     idUsuario: { type: DataTypes.INTEGER, allowNull: true }
 }, { timestamps: true });
 

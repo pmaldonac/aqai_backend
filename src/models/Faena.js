@@ -5,7 +5,8 @@ const Marea = require('./Marea');
 const Faena = sequelize.define('Faena', {
   fechaInicio: { type: DataTypes.DATE },
   fechaFin: { type: DataTypes.DATE },
-  estado: { type: DataTypes.STRING(50) }
+  estado: { type: DataTypes.STRING(50) },
+  idMarea:{type: DataTypes.INTEGER, allowNull: false},
 }, { timestamps: true });
 
 Faena.belongsTo(Marea, { foreignKey: 'idMarea', onDelete: 'CASCADE' });
