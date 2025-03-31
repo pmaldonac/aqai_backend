@@ -13,7 +13,8 @@ exports.createUsuarioController = async(req,res) =>{
             return res.status(400).json({status:400, message: "Error al realizar solicitud. Verifique parámetros."})
         }
         let newUsuario = await repository.createUsuarioRepository(data.nombre, data.apellido, data.rut, data.mail, data.usuario, data.password, data.nombreEmpresa, data.foto)
-        return res.status(201).json({status:201, message: "Usuario creado con éxito.", data: newUsuario})//}
+        return res.status(201).json({status:201, message: "Usuario creado con éxito.", data: newUsuario})
+    //}
     }catch(error){
         return res.status(500).json({
             status:500,
